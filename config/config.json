@@ -1,0 +1,125 @@
+{
+  "default_language": "de",
+  "supported_languages": [
+    "en",
+    "de"
+  ],
+  "framework": {
+    "platform_mode": "teamspeak"
+  },
+  "ts3": {
+    "host": "localhost",
+    "query_port": 10011,
+    "voice_port": 9987,
+    "username": "SupportBot",
+    "password": "",
+    "bot_nickname": "[PG] SupportBot",
+    "default_channel": "4",
+    "query_slowmode_ms": 300,
+    "admin_groups": [
+      6,
+      7
+    ],
+    "bot_groups": [
+      10
+    ]
+  },
+  "discord": {
+    "enabled": false,
+    "bot_token": "",
+    "application_id": "",
+    "guild_id": "",
+    "afk_kick_enabled": true,
+    "afk_inactivity_minutes": 1,
+    "bot_display_name": "UC-Framework",
+    "status_text": "",
+    "command_prefix": "!",
+    "log_channel_id": "",
+    "announcement_channel_id": "",
+    "support_category_id": "",
+    "support_log_channel_id": "",
+    "admin_role_ids": [],
+    "supporter_role_ids": [],
+    "bot_role_ids": []
+  },
+  "support": {
+    "enabled": true,
+    "support_channel_ids": [
+      8,
+      7
+    ],
+    "waiting_area_channel_id": 9,
+    "open_poke_message": "Support ist ab jetzt geöffnet!",
+    "closed_poke_message": "Support hat ab jetzt geschlossen!",
+    "join_open_poke_message": "Ein supporter wird sich gleich um dein anliegen kümmern, bitte warte hier",
+    "join_closed_poke_message": "Der support ist geschlossen.",
+    "supporter_poke_message": "Supportfall, bitte kümmere dich um den user!",
+    "supporter_group_ids": [
+      3,
+      6
+    ],
+    "auto_schedule_enabled": false,
+    "auto_open_time": "08:00",
+    "auto_close_time": "22:00"
+  },
+  "announcement": {
+    "message": "",
+    "repeat_enabled": false,
+    "schedule_mode": "interval",
+    "repeat_interval_minutes": 10,
+    "repeat_interval_count": 1,
+    "repeat_time": "08:00"
+  },
+  "bot_control": {
+    "enabled": true,
+    "bot_executable": "uc-framework_bot",
+    "working_dir": ".",
+    "bot_args": [],
+    "watchdog_enabled": true,
+    "watchdog_min_interval_sec": 60,
+    "watchdog_max_interval_sec": 120
+  },
+  "web_auth": {
+    "enabled": false,
+    "provider": "local",
+    "allow_ranksystem_fallback": false,
+    "username": "admin",
+    "password": "",
+    "password_hash": "$2a$10$AnpnRE30r7aAfjZ9BZR0Yu7WdijeRyxI6P0heEREGij5/icxETi96",
+    "force_password_change": false,
+    "session_ttl_minutes": 1440,
+    "ranksystem": {
+      "login_url": "",
+      "username_field": "username",
+      "password_field": "password",
+      "api_key_header": "X-API-Key",
+      "api_key_value": "",
+      "bearer_token": ""
+    }
+  },
+  "plugin_configs": {
+    "admincounter": {
+      "admin_groups": [],
+      "rename_channel_id": 0,
+      "rename_name_template": "",
+      "rename_count_token": "{count}"
+    },
+    "afkmover": {
+      "enabled": true,
+      "afk_channel_id": 0,
+      "afk_channel_name": "",
+      "timeout_seconds": 600,
+      "return_on_activity": true,
+      "excluded_channels": [
+        4
+      ]
+    },
+    "membercounter": {
+      "excluded_groups": [],
+      "excluded_nicknames": [],
+      "rename_channel_id": 0,
+      "rename_name_template": "",
+      "rename_count_token": "{count}"
+    }
+  }
+}

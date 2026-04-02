@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.login">UC-Framework Login</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <main class="login-shell">
+            <div class="login-brand" aria-hidden="true">
+                <img src="/uc-framework-logo.png" alt="UC-Framework logo" class="login-logo">
+            </div>
+            <h2 class="login-subtitle" data-i18n="login.subtitle">Web interface login</h2>
+            <p class="login-subtitle" data-i18n="login.text">Please sign in with your credentials.</p>
+            <form id="login-form" class="settings-card login-form">
+                <div class="form-group">
+                    <label for="username" data-i18n="login.username">Username</label>
+                    <input id="username" type="text" required autocomplete="username" data-i18n-placeholder="login.username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password" data-i18n="login.password">Password</label>
+                    <input id="password" type="password" required autocomplete="current-password" data-i18n-placeholder="login.password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn-save" data-i18n="login.signIn">Sign in</button>
+                <div id="login-status" class="save-status"></div>
+            </form>
+            <div class="language-toolbar">
+                <label for="login-language-select" data-i18n="nav.language">Language</label>
+                <select id="login-language-select" data-language-switcher>
+                    <option value="en" data-i18n="nav.languageEnglish">English</option>
+                    <option value="de" data-i18n="nav.languageGerman">German</option>
+                </select>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

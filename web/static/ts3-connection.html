@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.ts3Connection">TS3 Connection Test</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="ts3conn.heading">TS3 Connection Test</h1>
+            <p class="muted" data-i18n="ts3conn.description">Check whether the bot is currently connected to TeamSpeak and run an active connection test.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="ts3conn.currentStatus">Current status</h2>
+                <div class="form-group">
+                    <label data-i18n="ts3conn.connected">Connected</label>
+                    <strong id="ts3conn-connected">-</strong>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="ts3conn.host">Host</label>
+                    <span id="ts3conn-host">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="ts3conn.port">Query Port</label>
+                    <span id="ts3conn-port">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="ts3conn.lastCheck">Last check</label>
+                    <span id="ts3conn-check">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="ts3conn.lastError">Last error</label>
+                    <span id="ts3conn-error">-</span>
+                </div>
+            </div>
+
+            <div class="page-actions">
+                <button type="button" class="btn-save" onclick="loadTS3ConnectionStatus()" data-i18n="ts3conn.refresh">Refresh status</button>
+                <button type="button" class="btn-add" onclick="runTS3ConnectionTest()" data-i18n="ts3conn.runTest">Run connection test</button>
+            </div>
+            <div id="ts3conn-status" class="save-status"></div>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="ts3-connection.js"></script>
+</body>
+</html>

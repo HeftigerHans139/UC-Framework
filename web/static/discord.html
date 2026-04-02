@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.discord">Discord Settings</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="discord.heading">Discord Settings</h1>
+            <p class="muted" data-i18n="discord.description">Prepare Discord integration completely in the web interface. All important bot, server, channel, and role settings can be maintained here.</p>
+
+            <div class="settings-card">
+                <div class="feature-toggle-card">
+                    <div class="feature-toggle-main">
+                        <div class="feature-toggle-copy">
+                            <h3 data-i18n="discord.enableTitle">Discord integration</h3>
+                            <p data-i18n="discord.enableHint">Enable this as soon as the Discord connection should be configured and prepared in the framework.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="discord-enabled">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <div class="card-title-row">
+                    <h2 data-i18n="discord.authTitle">Bot Access</h2>
+                    <span class="help-icon-wrap">
+                        <span class="help-icon" tabindex="0" aria-describedby="discord-auth-help-tooltip">?</span>
+                        <span id="discord-auth-help-tooltip" class="help-tooltip" data-i18n-html="discord.authHelpHtml">
+                            <strong>Bot Access</strong>
+                            <p>Bot token: secret key for bot login.</p><br>
+                            <p>Application ID: unique ID of the Discord application.</p><br>
+                            <p>Guild ID: unique ID of your Discord server.</p><br>
+                        </span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="discord-bot-token" data-i18n="discord.botToken">Bot token</label>
+                    <input id="discord-bot-token" type="password" data-i18n-placeholder="discord.botTokenPlaceholder" placeholder="Discord bot token">
+                </div>
+                <div class="form-group">
+                    <label for="discord-application-id" data-i18n="discord.applicationId">Application ID</label>
+                    <input id="discord-application-id" type="text" data-i18n-placeholder="discord.applicationIdPlaceholder" placeholder="Discord application ID">
+                </div>
+                <div class="form-group">
+                    <label for="discord-guild-id" data-i18n="discord.guildId">Guild ID</label>
+                    <input id="discord-guild-id" type="text" data-i18n-placeholder="discord.guildIdPlaceholder" placeholder="Discord guild ID">
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="discord.behaviorTitle">Bot Behavior</h2>
+                <div class="form-group">
+                    <label for="discord-bot-display-name" data-i18n="discord.botDisplayName">Display name</label>
+                    <input id="discord-bot-display-name" type="text" data-i18n-placeholder="discord.botDisplayNamePlaceholder" placeholder="UC-Framework">
+                </div>
+                <div class="form-group">
+                    <label for="discord-status-text" data-i18n="discord.statusText">Status text</label>
+                    <input id="discord-status-text" type="text" data-i18n-placeholder="discord.statusTextPlaceholder" placeholder="Watching support activity">
+                </div>
+                <div class="form-group">
+                    <label for="discord-command-prefix" data-i18n="discord.commandPrefix">Command prefix</label>
+                    <input id="discord-command-prefix" type="text" maxlength="5" data-i18n-placeholder="discord.commandPrefixPlaceholder" placeholder="!">
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="discord.afkTitle">Discord AFK Handling</h2>
+                <div class="feature-toggle-card">
+                    <div class="feature-toggle-main">
+                        <div class="feature-toggle-copy">
+                               <h3 data-i18n="discord.afkKickTitle">Kick inactive voice users</h3>
+                               <p data-i18n="discord.afkKickHint">Discord-specific behavior: users who have not spoken or changed their voice state for the configured time are disconnected from voice.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="discord-afk-kick-enabled">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="discord-afk-inactivity-minutes" data-i18n="discord.afkInactivityMinutes">Inactivity timeout (minutes)</label>
+                    <input id="discord-afk-inactivity-minutes" type="number" min="1" max="1440" value="30">
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="discord.channelsTitle">Channels</h2>
+                <div class="form-group">
+                    <label for="discord-log-channel-id" data-i18n="discord.logChannelId">Log channel ID</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordChannelPicker('discord-log-channel-id', ['text', 'announcement'])" data-i18n="discord.chooseChannel">Choose channel</button>
+                        <input id="discord-log-channel-id" type="text" data-i18n-placeholder="discord.channelIdPlaceholder" placeholder="Discord channel ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="discord-announcement-channel-id" data-i18n="discord.announcementChannelId">Announcement channel ID</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordChannelPicker('discord-announcement-channel-id', ['text', 'announcement'])" data-i18n="discord.chooseChannel">Choose channel</button>
+                        <input id="discord-announcement-channel-id" type="text" data-i18n-placeholder="discord.channelIdPlaceholder" placeholder="Discord channel ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="discord-support-category-id" data-i18n="discord.supportCategoryId">Support category ID</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordChannelPicker('discord-support-category-id', ['category'])" data-i18n="discord.chooseChannel">Choose channel</button>
+                        <input id="discord-support-category-id" type="text" data-i18n-placeholder="discord.channelIdPlaceholder" placeholder="Discord category ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="discord-support-log-channel-id" data-i18n="discord.supportLogChannelId">Support log channel ID</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordChannelPicker('discord-support-log-channel-id', ['text', 'announcement'])" data-i18n="discord.chooseChannel">Choose channel</button>
+                        <input id="discord-support-log-channel-id" type="text" data-i18n-placeholder="discord.channelIdPlaceholder" placeholder="Discord channel ID">
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="discord.rolesTitle">Roles</h2>
+
+                <div class="form-group" style="display:block;">
+                    <label data-i18n="discord.adminRoles">Admin role IDs</label>
+                    <div id="discord-admin-role-tags" class="tag-list" style="margin-bottom:0.5em;"></div>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordRolePicker('admin')" data-i18n="discord.chooseRole">Choose roles</button>
+                        <input type="text" id="discord-admin-role-input" data-i18n-placeholder="discord.roleIdPlaceholder" placeholder="Discord role ID">
+                        <button type="button" class="btn-add" onclick="addDiscordRole('admin')" data-i18n="discord.addRole">Add</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label data-i18n="discord.supporterRoles">Supporter role IDs</label>
+                    <div id="discord-supporter-role-tags" class="tag-list" style="margin-bottom:0.5em;"></div>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordRolePicker('supporter')" data-i18n="discord.chooseRole">Choose roles</button>
+                        <input type="text" id="discord-supporter-role-input" data-i18n-placeholder="discord.roleIdPlaceholder" placeholder="Discord role ID">
+                        <button type="button" class="btn-add" onclick="addDiscordRole('supporter')" data-i18n="discord.addRole">Add</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label data-i18n="discord.botRoles">Bot role IDs</label>
+                    <div id="discord-bot-role-tags" class="tag-list" style="margin-bottom:0.5em;"></div>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openDiscordRolePicker('bot')" data-i18n="discord.chooseRole">Choose roles</button>
+                        <input type="text" id="discord-bot-role-input" data-i18n-placeholder="discord.roleIdPlaceholder" placeholder="Discord role ID">
+                        <button type="button" class="btn-add" onclick="addDiscordRole('bot')" data-i18n="discord.addRole">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-save" onclick="saveDiscordSettings()" data-i18n="discord.save">Save Discord settings</button>
+            <div id="discord-settings-status" class="save-status"></div>
+        </main>
+    </div>
+
+    <div id="discord-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="discord-channel-modal-title">
+            <h3 id="discord-channel-modal-title" data-i18n="discord.channelPopupTitle">Select Discord channel</h3>
+            <p class="muted" data-i18n="discord.channelPopupHint">Click one channel to use its ID for the selected field.</p>
+            <div id="discord-channel-picker-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeDiscordChannelPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="discord-role-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="discord-role-modal-title">
+            <h3 id="discord-role-modal-title" data-i18n="discord.rolePopupTitle">Select Discord roles</h3>
+            <p class="muted" data-i18n="discord.rolePopupHint">Click roles to add or remove them. Multiple selection is possible.</p>
+            <div id="discord-role-picker-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeDiscordRolePicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="discord.js"></script>
+</body>
+</html>

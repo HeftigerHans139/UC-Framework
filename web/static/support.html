@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.support">Support Channels</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1><span data-i18n="support.heading">Support Channel Control</span> <span id="support-status-badge" class="plugin-status-badge"></span></h1>
+            <p class="muted" data-i18n="support.description">Configure support channels, poke messages, waiting area, and automatic open/close times.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="support.settingsTitle">Support Settings</h2>
+                <p class="muted" style="margin:0 0 1em;" data-i18n="support.generalText">Plugin activation is managed centrally on the plugins page. This page is for configuration only.</p>
+                <div class="form-group" style="display:block;">
+                    <label data-i18n="support.channels">Support channels to open/close</label>
+                    <div id="support-channel-tags" class="tag-list" style="margin-bottom:0.5em;"></div>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add has-help-tooltip" onclick="openSupportChannelPicker()">
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="support.chooseChannels">Choose channels</span>
+                        </button>
+                        <input type="number" id="support-new-channel" data-i18n-placeholder="support.channelIdPlaceholder" placeholder="Channel ID" min="1">
+                        <button type="button" class="btn-add" onclick="addSupportChannel()" data-i18n="support.add">Add</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-waiting-area" data-i18n="support.waitingArea">Support waiting area</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add has-help-tooltip" onclick="openSupportWaitingAreaPicker()">
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="support.chooseWaitingArea">Choose waiting area</span>
+                        </button>
+                        <input type="number" id="support-waiting-area" data-i18n-placeholder="support.channelIdPlaceholder" placeholder="Channel ID" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="support.waitingPreviewLabel">Selected waiting area</label>
+                    <span id="support-waiting-preview" class="muted">-</span>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-open-message" data-i18n="support.openPoke">Server message when support is opened</label>
+                    <textarea id="support-open-message" rows="3" maxlength="250" data-i18n-placeholder="support.openPokePlaceholder" placeholder="Support is now open."></textarea>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-close-message" data-i18n="support.closePoke">Server message when support is closed</label>
+                    <textarea id="support-close-message" rows="3" maxlength="250" data-i18n-placeholder="support.closePokePlaceholder" placeholder="Support is now closed."></textarea>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-join-open-message" data-i18n="support.joinOpenPoke">Poke for users joining while support is open</label>
+                    <textarea id="support-join-open-message" rows="2" maxlength="250" data-i18n-placeholder="support.joinOpenPokePlaceholder" placeholder="Welcome, support is currently open."></textarea>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-join-close-message" data-i18n="support.joinClosedPoke">Poke for users joining while support is closed</label>
+                    <textarea id="support-join-close-message" rows="2" maxlength="110" data-i18n-placeholder="support.joinClosedPokePlaceholder" placeholder="Support is currently closed."></textarea>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label for="support-supporter-message" data-i18n="support.supporterPoke">Poke for supporters when a user joins (open support only)</label>
+                    <textarea id="support-supporter-message" rows="2" maxlength="250" data-i18n-placeholder="support.supporterPokePlaceholder" placeholder="New support request from {user}."></textarea>
+                </div>
+
+                <div class="form-group" style="display:block;">
+                    <label data-i18n="support.supporterGroups">Supporter server groups (multiple selection)</label>
+                    <div id="support-supporter-group-tags" class="tag-list" style="margin-bottom:0.5em;"></div>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add" onclick="openSupporterGroupPicker()">
+                            <span data-i18n="support.chooseGroups">Choose groups</span>
+                        </button>
+                        <input type="number" id="support-new-group" data-i18n-placeholder="support.groupIdPlaceholder" placeholder="Group ID" min="1">
+                        <button type="button" class="btn-add" onclick="addSupporterGroup()" data-i18n="support.add">Add</button>
+                    </div>
+                </div>
+
+                <div class="feature-toggle-card">
+                    <div class="feature-toggle-main">
+                        <div class="feature-toggle-copy">
+                            <h3 data-i18n="support.autoTitle">Automatic opening and closing</h3>
+                            <p data-i18n="support.autoHint">Automatically toggle support channels by time (local server time).</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="support-auto-enabled">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="support-open-time" data-i18n="support.openTime">Open time</label>
+                    <input id="support-open-time" type="time" value="08:00">
+                </div>
+                <div class="form-group">
+                    <label for="support-close-time" data-i18n="support.closeTime">Close time</label>
+                    <input id="support-close-time" type="time" value="22:00">
+                </div>
+
+                <button type="button" class="btn-save" onclick="saveSupportSettings()" data-i18n="support.save">Save support settings</button>
+                <div id="support-settings-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="support.manualTitle">Manual open and close</h2>
+                <div class="form-group"><label data-i18n="support.currentState">Current state</label><span id="support-current-state">-</span></div>
+                <div class="form-group"><label data-i18n="support.lastAction">Last action</label><span id="support-last-action">-</span></div>
+                <div class="form-group"><label data-i18n="support.lastError">Last error</label><span id="support-last-error">-</span></div>
+                <div class="page-actions" style="justify-content:flex-start; margin-left:0; margin-right:0; max-width:none;">
+                    <button type="button" class="btn-save" onclick="executeSupportAction('open')" data-i18n="support.openNow">Open now</button>
+                    <button type="button" class="btn-add" onclick="executeSupportAction('close')" data-i18n="support.closeNow">Close now</button>
+                    <button type="button" class="btn-add" onclick="loadSupportStatus()" data-i18n="support.refresh">Refresh status</button>
+                </div>
+                <div id="support-action-status" class="save-status"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="support-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="support-channel-modal-title">
+            <h3 id="support-channel-modal-title" data-i18n="support.channelPopupTitle">Select support channels</h3>
+            <p class="muted" data-i18n="support.channelPopupHint">Click channels to add or remove them. Multiple selection possible.</p>
+            <div id="support-channel-picker-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeSupportChannelPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="support-group-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="support-group-modal-title">
+            <h3 id="support-group-modal-title" data-i18n="support.groupPopupTitle">Select supporter groups</h3>
+            <p class="muted" data-i18n="support.groupPopupHint">Click groups to add or remove them. Multiple selection possible.</p>
+            <div id="support-group-picker-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeSupporterGroupPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="support-waiting-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="support-waiting-modal-title">
+            <h3 id="support-waiting-modal-title" data-i18n="support.waitingPopupTitle">Select waiting area</h3>
+            <p class="muted" data-i18n="support.waitingPopupHint">Choose one channel as the waiting area.</p>
+            <div id="support-waiting-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeSupportWaitingAreaPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="support.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.afkMover">AFK Mover</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1><span data-i18n="afk.heading">AFK Mover</span> <span id="afk-status-badge" class="plugin-status-badge"></span></h1>
+
+            <div class="settings-card">
+                <h2 data-i18n="afk.general">General</h2>
+                <p class="muted" style="margin:0 0 1em;" data-i18n="afk.generalText">Plugin activation is managed centrally on the plugins page. This page is for configuration only.</p>
+                <div class="form-group">
+                    <label for="afk-channel-id" data-i18n="afk.channelId">AFK channel ID</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add has-help-tooltip" onclick="openAfkChannelPicker()">
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="afk.chooseTargetChannel">Choose target channel</span>
+                        </button>
+                        <input type="number" id="afk-channel-id" min="0" placeholder="5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="afk.targetPreviewLabel">Ausgewählter Zielchannel</label>
+                    <span id="afk-target-preview" class="muted">-</span>
+                </div>
+                <div class="form-group">
+                    <label for="afk-timeout" data-i18n="afk.timeoutMinutes">Inactivity time (minutes)</label>
+                    <input type="number" id="afk-timeout" min="1" placeholder="10">
+                </div>
+                <div class="feature-toggle-card" aria-labelledby="afk-return-feature-title">
+                    <div class="feature-toggle-main">
+                        <div class="feature-toggle-copy">
+                            <h3 id="afk-return-feature-title" data-i18n="afk.returnOnActivityTitle">Auto return after activity</h3>
+                            <p class="muted" data-i18n="afk.returnOnActivityHint">If enabled, users moved by AFK Mover are returned to their previous channel when they become active again.</p>
+                        </div>
+                        <label class="switch" for="afk-return-on-activity" aria-label="Return moved users on activity">
+                            <input type="checkbox" id="afk-return-on-activity">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="afk.excludedChannels">Excluded channels</h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="afk.excludedChannelsText">Users in these channels are not moved into the AFK channel.</p>
+                <div id="excluded-channels-list" class="tag-list"></div>
+                <div class="inline-input-actions choose-left">
+                    <button type="button" class="btn-add has-help-tooltip" onclick="openExcludedChannelPicker()">
+                        <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                            <span class="button-help-icon">?</span>
+                            <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                        </span>
+                        <span data-i18n="afk.chooseExcludedChannel">Choose excluded channel</span>
+                    </button>
+                    <input type="number" id="new-excluded-channel" data-i18n-placeholder="afk.channelIdPlaceholder" placeholder="Channel ID" min="1">
+                    <button type="button" class="btn-add" onclick="addExcludedChannel()" data-i18n="afk.add">Add</button>
+                </div>
+            </div>
+
+            <div class="page-actions">
+                <button type="button" class="btn-save" onclick="saveAfkConfig()" data-i18n="afk.save">Save settings</button>
+            </div>
+            <div id="save-status" class="save-status"></div>
+        </main>
+    </div>
+
+    <div id="afk-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="afk-channel-modal-title">
+            <h3 id="afk-channel-modal-title" data-i18n="afk.channelPopupTitle">Zielchannel wählen</h3>
+            <p class="muted" data-i18n="afk.channelPopupHint">Wähle den Channel, in den inaktive User verschoben werden.</p>
+            <div id="afk-channel-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeAfkChannelPicker()" data-i18n="common.close">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="excluded-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="excluded-channel-modal-title">
+            <h3 id="excluded-channel-modal-title" data-i18n="afk.excludedChannelPopupTitle">Excluded channel auswählen</h3>
+            <p class="muted" data-i18n="afk.excludedChannelPopupHint">Wähle einen Channel aus, der vom AFK-Move ausgeschlossen werden soll.</p>
+            <div id="excluded-channel-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeExcludedChannelPicker()" data-i18n="common.close">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="afkmover.js"></script>
+</body>
+</html>

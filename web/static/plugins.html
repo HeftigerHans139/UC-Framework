@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.plugins">Plugins</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="plugins.heading">Plugins</h1>
+            <p class="muted" data-i18n="plugins.description">Hier kannst du Plugins aktivieren oder deaktivieren. Die detaillierte Konfiguration bleibt auf den jeweiligen Plugin-Seiten.</p>
+
+            <section class="settings-card">
+                <h2 data-i18n="plugins.listHeading">Plugin Overview</h2>
+                <div id="plugins-page-list"><span data-i18n="common.loading">Loading...</span></div>
+            </section>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="plugins.js"></script>
+</body>
+</html>

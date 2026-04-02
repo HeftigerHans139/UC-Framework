@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.ts3Settings">TeamSpeak Settings</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="ts3.heading">TeamSpeak Settings</h1>
+            <p class="muted" data-i18n="ts3.description">Here you can edit all TS3 connection and bot data. After saving, a bot restart is required for the new connection to become active.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="ts3.server">Server</h2>
+                <div class="form-group">
+                    <label for="ts3-host" data-i18n="ts3.host">TS3 host address</label>
+                    <input id="ts3-host" type="text" placeholder="ts3.example.net">
+                </div>
+                <div class="form-group">
+                    <label for="ts3-query-port" data-i18n="ts3.queryPort">TS3 query port</label>
+                    <input id="ts3-query-port" type="number" min="1" max="65535" placeholder="10011">
+                </div>
+                <div class="form-group">
+                    <label for="ts3-voice-port" data-i18n="ts3.voicePort">TS3 voice port</label>
+                    <input id="ts3-voice-port" type="number" min="1" max="65535" placeholder="9987">
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="ts3.queryLogin">Query Login</h2>
+                <div class="form-group">
+                    <label for="ts3-query-user" data-i18n="ts3.queryUser">TS3 query user</label>
+                    <input id="ts3-query-user" type="text" placeholder="serveradmin">
+                </div>
+                <div class="form-group">
+                    <label for="ts3-query-pass" data-i18n="ts3.queryPassword">TS3 query password</label>
+                    <input id="ts3-query-pass" type="password" data-i18n-placeholder="login.password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="ts3.botBehavior">Bot Behavior</h2>
+                <div class="form-group">
+                    <label for="ts3-bot-nickname" data-i18n="ts3.botNickname">Bot nickname</label>
+                    <input id="ts3-bot-nickname" type="text" placeholder="uc_framework">
+                </div>
+                <div class="form-group">
+                    <label for="ts3-default-channel" data-i18n="ts3.defaultChannel">Default channel</label>
+                    <div class="inline-input-actions choose-left">
+                        <button type="button" class="btn-add has-help-tooltip" id="ts3-channel-picker-open" onclick="openTS3ChannelPicker()">
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="ts3.chooseChannel">Choose channel</span>
+                        </button>
+                        <input id="ts3-default-channel" type="text" placeholder="Channel ID or name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ts3-query-slowmode" data-i18n="ts3.querySlowmode">Query slowmode (ms)</label>
+                    <input id="ts3-query-slowmode" type="number" min="50" step="10" placeholder="250">
+                </div>
+            </div>
+
+            <button class="btn-save" onclick="saveTS3Settings()" data-i18n="ts3.save">Save TS3 settings</button>
+            <div id="ts3-settings-status" class="save-status"></div>
+        </main>
+    </div>
+
+    <div id="ts3-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ts3-channel-modal-title">
+            <h3 id="ts3-channel-modal-title" data-i18n="ts3.channelPopupTitle">Available channels</h3>
+            <p class="muted" data-i18n="ts3.channelPopupHint">Select a channel to use as default channel.</p>
+            <div id="ts3-channel-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeTS3ChannelPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="ts3-settings.js"></script>
+</body>
+</html>
+

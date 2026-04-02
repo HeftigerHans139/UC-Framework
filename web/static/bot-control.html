@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.botControl">Bot Control</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="bot.heading">Bot Control</h1>
+            <p class="muted" data-i18n="bot.description">Here you can start, stop, and restart the bot. The watchdog automatically restarts the bot if it crashes or a start attempt fails, and retries every 60-120 seconds.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="bot.status">Bot Status</h2>
+                <div class="form-group"><label data-i18n="bot.running">Running</label><span id="bot-running">-</span></div>
+                <div class="form-group"><label data-i18n="bot.pid">PID</label><span id="bot-pid">-</span></div>
+                <div class="form-group"><label data-i18n="bot.desiredState">Desired state</label><span id="bot-desired">-</span></div>
+                <div class="form-group"><label data-i18n="bot.lastAction">Last action</label><span id="bot-last-action">-</span></div>
+                <div class="form-group"><label data-i18n="bot.lastError">Last error</label><span id="bot-last-error">-</span></div>
+
+                <div class="add-row" style="margin-top:1em;">
+                    <button class="btn-save" onclick="botAction('start')" data-i18n="bot.start">Start bot</button>
+                    <button class="btn-save" onclick="botAction('stop')" data-i18n="bot.stop">Stop bot</button>
+                    <button class="btn-save" onclick="botAction('restart')" data-i18n="bot.restart">Restart bot</button>
+                </div>
+                <div id="bot-action-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="bot.watchdog">Watchdog</h2>
+                <div class="form-group"><label data-i18n="bot.watchdogRunning">Watchdog running</label><span id="watchdog-running">-</span></div>
+                <div class="form-group"><label data-i18n="bot.watchdogPid">Watchdog PID</label><span id="watchdog-pid">-</span></div>
+
+                <div class="add-row" style="margin-top:1em;">
+                    <button class="btn-save" onclick="watchdogAction('start')" data-i18n="bot.startWatchdog">Start watchdog</button>
+                    <button class="btn-save" onclick="watchdogAction('stop')" data-i18n="bot.stopWatchdog">Stop watchdog</button>
+                    <button class="btn-save" onclick="refreshBotControl()" data-i18n="bot.refreshStatus">Refresh status</button>
+                </div>
+                <div id="watchdog-action-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="bot.system">System</h2>
+                <div class="form-group"><label data-i18n="bot.os">Operating system</label><span id="sys-os">-</span></div>
+                <div class="form-group"><label data-i18n="bot.arch">Architecture</label><span id="sys-arch">-</span></div>
+                <div class="form-group"><label data-i18n="bot.workingDir">Working directory</label><span id="sys-workdir">-</span></div>
+                <div class="form-group"><label data-i18n="bot.botFile">Bot executable</label><span id="sys-bot">-</span></div>
+                <div class="form-group"><label data-i18n="bot.supervisorScript">Supervisor script</label><span id="sys-supervisor">-</span></div>
+                <div class="form-group"><label data-i18n="bot.watchdogScript">Watchdog script</label><span id="sys-watchdog">-</span></div>
+                <div class="form-group"><label data-i18n="bot.logFile">Log file</label><span id="sys-logfile">-</span></div>
+            </div>
+
+            <!-- <div class="settings-card">
+                <h2 data-i18n="bot.logs">Log Viewer</h2>
+                <div class="add-row log-toolbar">
+                    <label for="log-lines" class="log-label" data-i18n="bot.lastLines">Last lines</label>
+                    <select id="log-lines">
+                        <option value="25">25</option>
+                        <option value="100" selected>100</option>
+                        <option value="250">250</option>
+                        <option value="500">500</option>
+                    </select>
+                    <label for="log-level" class="log-label" data-i18n="bot.filter">Filter</label>
+                    <select id="log-level">
+                        <option value="all" selected data-i18n="log.level.all">All</option>
+                        <option value="error" data-i18n="log.level.error">Error</option>
+                        <option value="warn" data-i18n="log.level.warn">Warn</option>
+                        <option value="info" data-i18n="log.level.info">Info</option>
+                        <option value="debug" data-i18n="log.level.debug">Debug</option>
+                    </select>
+                    <button class="btn-save" onclick="refreshLogs()" data-i18n="bot.loadLogs">Load logs</button>
+                </div>
+                <pre id="bot-log-output" class="log-output">Loading...</pre>
+                <div id="log-status" class="save-status"></div>
+            </div> -->
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="bot-control.js"></script>
+</body>
+</html>

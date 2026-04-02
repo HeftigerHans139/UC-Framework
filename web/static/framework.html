@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.framework">Framework</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="framework.heading">Framework</h1>
+            <p class="muted" data-i18n="framework.description">Here you can see framework metadata, choose the active communication platform setup, and restart the complete framework process.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="framework.platformTitle">Platform Setup</h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="framework.platformHint">Choose whether the framework should be prepared for TeamSpeak, Discord, or both platforms together.</p>
+                <div class="form-group">
+                    <label data-i18n="framework.platformMode">Communication platforms</label>
+                    <div style="display:flex; gap:1em; flex-wrap:wrap;">
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:180px;">
+                            <input type="radio" name="framework-platform-mode" value="teamspeak">
+                            <span data-i18n="framework.platformTeamspeak">TeamSpeak</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:180px;">
+                            <input type="radio" name="framework-platform-mode" value="discord">
+                            <span data-i18n="framework.platformDiscord">Discord</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:220px;">
+                            <input type="radio" name="framework-platform-mode" value="both">
+                            <span data-i18n="framework.platformBoth">TeamSpeak and Discord</span>
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn-save" onclick="saveFrameworkSettings()" data-i18n="framework.savePlatforms">Save platform setup</button>
+                <div id="framework-platform-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="framework.infoTitle">Framework Information</h2>
+                <div class="form-group"><label data-i18n="framework.name">Name</label><span id="framework-name">-</span></div>
+                <div class="form-group"><label data-i18n="framework.version">Version</label><span id="framework-version">-</span></div>
+                <div class="form-group"><label data-i18n="framework.updatedAt">Updated at</label><span id="framework-updated-at">-</span></div>
+                <div class="form-group"><label data-i18n="framework.latestVersion">Latest version</label><span id="framework-latest-version">-</span></div>
+                <div class="form-group"><label data-i18n="framework.upToDate">Up to date</label><span id="framework-is-latest">-</span></div>
+                <div id="framework-info-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="framework.restartTitle">Framework Restart</h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="framework.restartHint">Restarts the entire framework process, including web API and runtime services.</p>
+                <button type="button" class="btn-save" onclick="restartFramework()" data-i18n="framework.restartButton">Restart framework</button>
+                <div id="framework-restart-status" class="save-status"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="framework.js"></script>
+</body>
+</html>

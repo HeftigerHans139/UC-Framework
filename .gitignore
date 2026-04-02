@@ -1,0 +1,24 @@
+# Editor
+.vscode/
+
+# Python local env
+.venv/
+
+# Runtime state and local process files
+runtime/
+*.pid
+
+# Logs and debug artifacts
+*.log
+debug_*.txt
+login_debug.txt
+
+# Local binaries/build outputs
+*.exe
+*.dll
+*.so
+*.dylib
+
+# OS artifacts
+.DS_Store
+Thumbs.db

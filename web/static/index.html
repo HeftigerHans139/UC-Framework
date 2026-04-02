@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.dashboard">UC-Framework Dashboard</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- Navigation wird per JS geladen -->
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="dashboard.heading">UC-Dashboard</h1>
+            
+            <section id="stats">
+                <h2 data-i18n="dashboard.stats">Statistics</h2>
+                <div class="rank-row">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3 trophy-col">
+                                    <p class="text-center"><i data-i18n="dashboard.admins">Admins</i></p>
+                                    <p class="text-center trophy">🛡️</p>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="tophuge" id="card-admins">-</div>
+                                    <div class="rank-label" data-i18n="dashboard.supportersOnline">Supporters online</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3 trophy-col">
+                                    <p class="text-center"><i data-i18n="dashboard.users">Users</i></p>
+                                    <p class="text-center trophy">🧑‍💻</p>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="tophuge" id="card-members">-</div>
+                                    <div class="rank-label" data-i18n="dashboard.membersOnline">Members online</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="bot-status">
+                <h2 data-i18n="dashboard.botStatus">Bot Status</h2>
+                <div id="bot-status-cards" class="bot-status-cards"><span data-i18n="dashboard.loading">Loading...</span></div>
+            </section>
+            <section id="plugins">
+                <h2 data-i18n="dashboard.plugins">Plugins</h2>
+                <div id="plugin-list" class="plugin-status-list"><span data-i18n="dashboard.loading">Loading...</span></div>
+            </section>
+            <section id="settings">
+                <h2 data-i18n="dashboard.settings">Settings</h2>
+                <div id="settings-content"><span data-i18n="dashboard.loading">Loading...</span></div>
+            </section>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

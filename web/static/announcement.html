@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.announcement">Announcements</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="announcement.heading">Server Announcements</h1>
+            <p class="muted" data-i18n="announcement.description">Send announcements to all connected users. Configure the announcement message and set it to send once, at a fixed time, or at regular intervals.</p>
+
+            <div class="settings-card">
+                <h2 data-i18n="announcement.settingsTitle">Announcement Message</h2>
+                <div class="form-group" style="display:block;">
+                    <label for="announcement-message" data-i18n="announcement.message">Message</label>
+                    <textarea id="announcement-message" rows="4" maxlength="500" data-i18n-placeholder="announcement.messagePlaceholder" placeholder="Type your announcement here..."></textarea>
+                </div>
+
+                <h2 style="margin-top:1.6em;" data-i18n="announcement.scheduleTitle">Scheduling</h2>
+                <div class="feature-toggle-card">
+                    <div class="feature-toggle-main">
+                        <div class="feature-toggle-copy">
+                            <h3 data-i18n="announcement.repeatTitle">Repeat announcement</h3>
+                            <p data-i18n="announcement.repeatHint">Send the announcement automatically at a fixed or recurring schedule. Disabled = send once only.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="announcement-repeat-enabled">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label data-i18n="announcement.scheduleMode">Schedule mode</label>
+                    <div style="display:flex; gap:1em; flex-wrap:wrap;">
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:150px;">
+                            <input type="radio" name="announcement-mode" value="once">
+                            <span data-i18n="announcement.modeOnce">Send once now</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:150px;">
+                            <input type="radio" name="announcement-mode" value="interval" checked>
+                            <span data-i18n="announcement.modeInterval">Repeat every X minutes</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.5em; flex:1; min-width:150px;">
+                            <input type="radio" name="announcement-mode" value="time">
+                            <span data-i18n="announcement.modeTime">Send at a specific time</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="announcement-interval-group" class="form-group">
+                    <label for="announcement-interval" data-i18n="announcement.intervalTime">Interval (minutes)</label>
+                    <input id="announcement-interval" type="number" min="10" max="1440" value="60">
+                    <small style="color:var(--muted);" data-i18n="announcement.intervalHint">Minimum 10 minutes</small>
+                    <label for="announcement-repeat-count" style="margin-top:0.8em;" data-i18n="announcement.intervalCount">How many times to send</label>
+                    <input id="announcement-repeat-count" type="number" min="1" max="500" value="1">
+                </div>
+
+                <div id="announcement-time-group" class="form-group" style="display:none;">
+                    <label for="announcement-time" data-i18n="announcement.fixedTime">Daily send time</label>
+                    <input id="announcement-time" type="time" value="08:00">
+                </div>
+
+                <button type="button" class="btn-save" onclick="saveAnnouncementSettings()" data-i18n="announcement.save">Save announcement settings</button>
+                <div id="announcement-settings-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="announcement.manualTitle">Send now</h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="announcement.manualHint">Send the current announcement message immediately to all connected users.</p>
+                <div class="form-group"><label data-i18n="announcement.lastSent">Last sent</label><span id="announcement-last-sent">-</span></div>
+                <div class="page-actions" style="justify-content:flex-start; margin-left:0; margin-right:0; max-width:none;">
+                    <button type="button" class="btn-save" onclick="sendAnnouncementNow()" data-i18n="announcement.sendNow">Send announcement now</button>
+                    <button type="button" class="btn-add" onclick="loadAnnouncementStatus()" data-i18n="announcement.refresh">Refresh status</button>
+                </div>
+                <div id="announcement-action-status" class="save-status"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="announcement.js"></script>
+</body>
+</html>

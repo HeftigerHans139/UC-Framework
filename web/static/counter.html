@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.counter">Counter Settings</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="counter.heading">Counter Settings</h1>
+
+            <!-- Admin Counter -->
+            <div class="settings-card">
+                <h2><span data-i18n="counter.adminCounter">Admin Counter</span> <span id="admin-status-badge" class="plugin-status-badge"></span></h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="counter.adminDescription">Server group IDs that count as admins.</p>
+                <div id="admin-groups-list" class="tag-list"></div>
+                <div class="add-row">
+                    <input type="number" id="new-admin-group" data-i18n-placeholder="counter.groupId" placeholder="Group ID" min="1">
+                    <button class="btn-add" onclick="addAdminGroup()" data-i18n="counter.add">Add</button>
+                </div>
+
+                <h3 style="margin-top:1.4em;" data-i18n="counter.renameSection">Channel rename on count change</h3>
+                <p class="muted" style="margin:0 0 0.4em;font-size:0.9em" data-i18n="counter.renameHint">Use a custom token, e.g. template: cspacer7 %% and token: %%</p>
+                <div class="form-group">
+                    <label for="admin-rename-channel-id" data-i18n="counter.renameChannelId">Channel ID to rename</label>
+                    <div class="inline-input-actions choose-left">
+                        <button
+                            type="button"
+                            class="btn-add has-help-tooltip"
+                            id="admin-rename-channel-picker"
+                            onclick="openCounterChannelPicker('admin')"
+                            style="display:none;"
+                        >
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="counter.chooseRenameChannel">Choose channel</span>
+                        </button>
+                        <input type="number" id="admin-rename-channel-id" min="0" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="admin-rename-template" data-i18n="counter.renameTemplate">New channel name template</label>
+                    <input type="text" id="admin-rename-template" placeholder="Admins Online: {count}">
+                </div>
+                <div class="form-group">
+                    <label for="admin-rename-token" data-i18n="counter.renameToken">Count placeholder token</label>
+                    <input type="text" id="admin-rename-token" placeholder="%%">
+                </div>
+
+                <button class="btn-save" onclick="saveAdminConfig()" data-i18n="counter.saveAdmin">Save Admin Counter</button>
+                <div id="admin-save-status" class="save-status"></div>
+            </div>
+
+            <!-- Member Counter -->
+            <div class="settings-card">
+                <h2><span data-i18n="counter.memberCounter">Member Counter</span> <span id="member-status-badge" class="plugin-status-badge"></span></h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="counter.memberDescription">All users are counted except for the following exclusions.</p>
+
+                <h3 data-i18n="counter.excludedGroups">Excluded groups</h3>
+                <p class="muted" style="margin:0 0 0.4em;font-size:0.9em" data-i18n="counter.excludedGroupsDesc">Users with these server group IDs are not counted.</p>
+                <div id="excluded-groups-list" class="tag-list"></div>
+                <div class="add-row">
+                    <input type="number" id="new-excluded-group" data-i18n-placeholder="counter.groupId" placeholder="Group ID" min="1">
+                    <button class="btn-add" onclick="addExcludedGroup()" data-i18n="counter.add">Add</button>
+                </div>
+
+                <h3 style="margin-top:1.4em;" data-i18n="counter.excludedNicknames">Excluded nicknames</h3>
+                <p class="muted" style="margin:0 0 0.4em;font-size:0.9em" data-i18n="counter.excludedNicknamesDesc">Users with exactly these nicknames are not counted.</p>
+                <div id="excluded-nicks-list" class="tag-list"></div>
+                <div class="add-row">
+                    <input type="text" id="new-excluded-nick" data-i18n-placeholder="counter.nickname" placeholder="Nickname">
+                    <button class="btn-add" onclick="addExcludedNick()" data-i18n="counter.add">Add</button>
+                </div>
+
+                <h3 style="margin-top:1.4em;" data-i18n="counter.renameSection">Channel rename on count change</h3>
+                <p class="muted" style="margin:0 0 0.4em;font-size:0.9em" data-i18n="counter.renameHint">Use a custom token, e.g. template: cspacer7 %% and token: %%</p>
+                <div class="form-group">
+                    <label for="member-rename-channel-id" data-i18n="counter.renameChannelId">Channel ID to rename</label>
+                    <div class="inline-input-actions choose-left">
+                        <button
+                            type="button"
+                            class="btn-add has-help-tooltip"
+                            id="member-rename-channel-picker"
+                            onclick="openCounterChannelPicker('member')"
+                            style="display:none;"
+                        >
+                            <span class="button-help-tooltip" role="tooltip" aria-hidden="true">
+                                <span class="button-help-icon">?</span>
+                                <span class="button-help-text" data-i18n="common.channelSelectionConnectedHint">Channel selection is only possible when the bot is connected to TeamSpeak.</span>
+                            </span>
+                            <span data-i18n="counter.chooseRenameChannel">Choose channel</span>
+                        </button>
+                        <input type="number" id="member-rename-channel-id" min="0" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="member-rename-template" data-i18n="counter.renameTemplate">New channel name template</label>
+                    <input type="text" id="member-rename-template" placeholder="Members Online: {count}">
+                </div>
+                <div class="form-group">
+                    <label for="member-rename-token" data-i18n="counter.renameToken">Count placeholder token</label>
+                    <input type="text" id="member-rename-token" placeholder="%%">
+                </div>
+
+                <button class="btn-save" onclick="saveMemberConfig()" data-i18n="counter.saveMember">Save Member Counter</button>
+                <div id="member-save-status" class="save-status"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="counter-channel-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="counter-channel-modal-title">
+            <h3 id="counter-channel-modal-title" data-i18n="counter.channelPopupTitle">Available channels</h3>
+            <p class="muted" data-i18n="counter.channelPopupHint">Select a channel. The selected channel ID is saved immediately.</p>
+            <div id="counter-channel-list" class="channel-list"></div>
+            <div class="page-actions">
+                <button type="button" class="btn-add" onclick="closeCounterChannelPicker()" data-i18n="common.close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js?v=20260329"></script>
+    <script src="i18n.js?v=20260329"></script>
+    <script src="main.js?v=20260329"></script>
+    <script src="counter.js?v=20260329"></script>
+</body>
+</html>

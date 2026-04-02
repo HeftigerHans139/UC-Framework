@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title.authSettings">Auth Settings</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/uc-framework-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uc-framework-logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <div id="nav"></div>
+        <main>
+            <h1 data-i18n="auth.heading">Authentication</h1>
+            <div id="force-password-hint" class="settings-card" style="display:none;border-left:4px solid #d32f2f;">
+                <h2 data-i18n="auth.forcePasswordTitle">Password change required</h2>
+                <p class="muted" style="margin:0;" data-i18n="auth.forcePasswordText">A new password must be set on first login. Other areas stay locked until then.</p>
+            </div>
+
+            <div id="auth-disabled-warning" class="settings-card" style="display:none;border-left:4px solid #d32f2f;">
+                <h2 data-i18n="auth.noLoginWarningTitle">Security warning</h2>
+                <p class="muted" style="margin:0;" data-i18n="auth.noLoginWarningText">Login is disabled. This is insecure and should be changed immediately.</p>
+            </div>
+
+            <div class="settings-card">
+                <h2 data-i18n="auth.currentMode">Current mode</h2>
+                <div class="form-group">
+                    <label for="auth-login-mode" data-i18n="auth.loginMode">Login mode</label>
+                    <select id="auth-login-mode">
+                        <option value="none" data-i18n="auth.modeNone">Without login</option>
+                        <option value="local" data-i18n="auth.modeLocal">Local login</option>
+                        <option value="ranksystem" data-i18n="auth.modeRanksystem">TSN-Ranksystem login</option>
+                        <option value="local_ranksystem" data-i18n="auth.modeLocalRanksystem">Local + TSN-Ranksystem login</option>
+                    </select>
+                </div>
+                <button class="btn-save" onclick="saveAuthMode()" data-i18n="auth.saveMode">Save login mode</button>
+                <div id="mode-status" class="save-status"></div>
+                <div class="form-group">
+                    <label data-i18n="common.enabled">Enabled</label>
+                    <span id="auth-enabled">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="common.provider">Provider</label>
+                    <span id="auth-provider">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="auth.activeMode">Active login mode</label>
+                    <span id="auth-active-mode">-</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="common.user">User</label>
+                    <span id="auth-username">-</span>
+                </div>
+            </div>
+
+            <div class="settings-card" id="auth-health-card">
+                <h2 data-i18n="auth.rankHealth">Rank-System Health</h2>
+                <p class="muted" style="margin:0 0 0.8em;" data-i18n="auth.rankHealthText">Checks whether the configured rank-system login endpoint is reachable.</p>
+                <button class="btn-save" onclick="checkAuthHealth()" data-i18n="auth.startHealth">Start health check</button>
+                <div id="health-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card" id="local-password-card" style="display:none;">
+                <h2 data-i18n="auth.changeLocalPassword">Change local password</h2>
+                <div class="form-group">
+                    <label for="current-password" data-i18n="auth.currentPassword">Current password</label>
+                    <input type="password" id="current-password" autocomplete="current-password">
+                </div>
+                <div class="form-group">
+                    <label for="new-password" data-i18n="auth.newPassword">New password</label>
+                    <input type="password" id="new-password" autocomplete="new-password" minlength="8">
+                </div>
+                <button class="btn-save" onclick="changePassword()" data-i18n="auth.savePassword">Save password</button>
+                <div id="password-status" class="save-status"></div>
+            </div>
+
+            <div class="settings-card" id="local-username-card" style="display:none;">
+                <h2 data-i18n="auth.changeLocalUsername">Change local username</h2>
+                <div class="form-group">
+                    <label for="current-password-username" data-i18n="auth.currentPassword">Current password</label>
+                    <input type="password" id="current-password-username" autocomplete="current-password">
+                </div>
+                <div class="form-group">
+                    <label for="new-username" data-i18n="auth.newUsername">New username</label>
+                    <input type="text" id="new-username" minlength="3" maxlength="64" data-i18n-placeholder="auth.newUsername" placeholder="New username">
+                </div>
+                <button class="btn-save" onclick="changeUsername()" data-i18n="auth.saveUsername">Save username</button>
+                <div id="username-status" class="save-status"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+    <script src="auth-settings.js"></script>
+</body>
+</html>
