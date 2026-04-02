@@ -2,6 +2,8 @@
 
 UC-Framework is a modular TeamSpeak 3 and discord bot framework written in Go, with a web interface, plugin system, bot lifecycle control, and configurable authentication.
 
+compatible with: Linux and Windows
+
 ## Table of Contents
 
 1. [What is UC-Framework?](#what-is-uc-framework)
