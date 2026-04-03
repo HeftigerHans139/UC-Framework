@@ -60,7 +60,9 @@ The goal is to manage TS3 server automation through a single API and UI instead 
 Supported login modes:
 
 - `none` (no login)
-- `local` (local login)
+- `local` (local login) (standard login: Username: admin 
+                                         Password:     password)
+                                         
 - `ranksystem` (TSN-Ranksystem login)
 - `local_ranksystem` (local login + ranksystem fallback)
 
